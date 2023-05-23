@@ -1,0 +1,34 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: "Web Server of StackName"
+
+Resources:
+  CNFSecGr:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: HTTP enable
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  WebServerofStackNameInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0889a44b331db0194
+      InstanceType: t2.micro
+      KeyName: first-key-pair
+      SecurityGroups:
+        - !Ref CNFSecGr
+      Tags:
+        - Key: Name
+          Value: Web Server of StackName
+      UserData: String
+
+Outputs: set of outputs
